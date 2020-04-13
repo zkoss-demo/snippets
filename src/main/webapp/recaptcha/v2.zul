@@ -1,0 +1,52 @@
+<zk xmlns:n="native">
+	<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" defer="true"/>
+	<script><![CDATA[
+	function afterValidate(response) {
+		zkbind.$('$recaptcha').command('onChallenge', {response: response});
+	}
+	]]>
+	</script>
+	<div>
+		<window title="Leave a message" width="600px"
+				viewModel="@id('vm') @init('org.zkoss.demo.snippets.recaptcha.RecaptchaV2VM')"
+				form="@id('fx') @load(vm) @save(vm, before='submit')">
+			<grid>
+				<columns>
+					<column hflex="min" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Name"/>
+						<textbox value="@bind(fx.name)"
+						         width="100%"
+						         constraint="no empty" />
+					</row>
+					<row>
+						<label value="E-mail (optional)"/>
+						<textbox value="@bind(fx.email)"
+						         width="100%"
+						         constraint="/(.+@.+\.[a-z]+)?/: e-mail address only"/>
+					</row>
+					<row>
+						<label value="Message"/>
+						<textbox value="@bind(fx.message)"
+						         multiline="true"
+						         width="100%"
+						         rows="5"
+						         constraint="no empty" />
+					</row>
+					<row>
+						<label/>
+						<n:div id="recaptcha" class="g-recaptcha"
+						       data-sitekey="6Lcj5AYTAAAAAHp_ATdyZcWkMi7lzO_JZPMhYj4S"
+						       data-callback="afterValidate" />
+					</row>
+					<row spans="2" align="right">
+						<button label="Submit" onClick="@command('submit')" disabled="@load(not fxStatus.dirty)"/>
+					</row>
+				</rows>
+			</grid>
+		</window>
+	</div>
+</zk>

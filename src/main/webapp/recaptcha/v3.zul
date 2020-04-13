@@ -1,0 +1,52 @@
+<zk xmlns:w="client">
+	<zscript><![CDATA[
+	String siteKey = "6LcVaeUUAAAAABFe5lO9RyRMGUq8T_YRvOAzzMjr";
+	]]>
+	</zscript>
+	<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=${siteKey}"/>
+	<script><![CDATA[
+	function submit() {
+		grecaptcha.execute('${siteKey}', {action: 'comments'}).then(function(token) {
+			zkbind.$('$main').command('submit', {token: token});
+		});
+	}
+	]]>
+	</script>
+	<div>
+		<window id="main" title="Leave a message" width="600px"
+				viewModel="@id('vm') @init('org.zkoss.demo.snippets.recaptcha.RecaptchaV3VM')"
+				form="@id('fx') @load(vm) @save(vm, before='submit')">
+			<grid>
+				<columns>
+					<column hflex="min" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Name"/>
+						<textbox value="@bind(fx.name)"
+						         width="100%"
+						         constraint="no empty" />
+					</row>
+					<row>
+						<label value="E-mail (optional)"/>
+						<textbox value="@bind(fx.email)"
+						         width="100%"
+						         constraint="/(.+@.+\.[a-z]+)?/: e-mail address only"/>
+					</row>
+					<row>
+						<label value="Message"/>
+						<textbox value="@bind(fx.message)"
+						         multiline="true"
+						         width="100%"
+						         rows="5"
+						         constraint="no empty" />
+					</row>
+					<row spans="2" align="right">
+						<button label="Submit" w:onClick="submit()" disabled="@load(not fxStatus.dirty)"/>
+					</row>
+				</rows>
+			</grid>
+		</window>
+	</div>
+</zk>

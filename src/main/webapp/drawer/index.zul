@@ -1,0 +1,11 @@
+<?link rel="stylesheet" type="text/css" href="index.css"?>
+<zk>
+	<div viewModel="@id('vm') @init('org.zkoss.demo.snippets.drawer.DrawerVM')">
+		<div sclass="float-button">
+			<button iconSclass="z-icon-angle-double-left" onClick="@command('open')"/>
+		</div>
+		<drawer id="dr1" width="auto" sclass="float-drawer" mask="false" visible="@bind(vm.open)">
+			<image src="world-map.png"/>
+		</drawer>
+	</div>
+</zk>

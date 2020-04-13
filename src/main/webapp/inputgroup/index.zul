@@ -1,0 +1,28 @@
+<?link rel="stylesheet" type="text/css" href="index.css"?>
+<zk>
+	<div viewModel="@id('vm') @init('org.zkoss.demo.snippets.inputgroup.InputgroupVM')">
+		<inputgroup id="ig" sclass="group" width="300px">
+			<textbox placeholder="From" hflex="1" value="@bind(vm.value)"/>
+			<button iconSclass="z-icon-fw z-icon-list-ul" popup="pp_list,ref=ig,position=after_start"/>
+			<button iconSclass="z-icon-fw z-icon-map-marker" popup="pp_map,ref=ig,position=after_start"/>
+		</inputgroup>
+		<popup id="pp_list">
+			<hlayout>
+				<button label="A" onClick="@command('chooseValue', val=self.label)"/>
+				<button label="B" onClick="@command('chooseValue', val=self.label)"/>
+				<button label="C" onClick="@command('chooseValue', val=self.label)"/>
+				<button label="D" onClick="@command('chooseValue', val=self.label)"/>
+			</hlayout>
+		</popup>
+		<popup id="pp_map">
+			<!-- Image by https://pixabay.com/users/Clker-Free-Vector-Images-3736/ from Pixabay -->
+			<imagemap src="world-map.png" onClick="@command('chooseValue', val=event.area)">
+				<area id="Asia" coords="409,28,622,233" tooltiptext="Asia"/>
+				<area id="America" coords="228,332,10,38" tooltiptext="America"/>
+				<area id="Africa" coords="271,146,379,283" tooltiptext="Africa"/>
+				<area id="Europe" coords="404,133,281,50" tooltiptext="Europe"/>
+				<area id="Oceania" coords="623,328,482,238" tooltiptext="Oceania"/>
+			</imagemap>
+		</popup>
+	</div>
+</zk>

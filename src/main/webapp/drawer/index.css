@@ -1,0 +1,14 @@
+:root {
+    --world-map-height: 344px;
+}
+
+.float-button {
+    position: fixed;
+    top: 50%;
+    right: 0;
+}
+
+.float-drawer .z-drawer-real {
+    height: calc(var(--world-map-height) + 32px);
+    top: calc(50% - var(--world-map-height) / 2);
+}

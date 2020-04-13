@@ -1,0 +1,40 @@
+<?link rel="stylesheet" type="text/css" href="index.css"?>
+<zk>
+	<div viewModel="@id('vm') @init('org.zkoss.demo.snippets.dropdowns.DropdownsVM')">
+		<toolbar>
+			<toolbarbutton iconSclass="z-icon-thumbs-o-up"
+			               label="Rating"
+			               popup="pp_rating,position=after_start,type=toggle"/>
+			<toolbarbutton iconSclass="z-icon-book"
+			               label="Type"
+			               popup="pp_type,position=after_start,type=toggle"/>
+			<toolbarbutton iconSclass="z-icon-bug"
+			               label="Print VM"
+			               onClick="@command('printVM')"/>
+		</toolbar>
+		<popup id="pp_rating">
+			<rating sclass="rating"
+			        iconSclass="z-icon-star"
+			        orient="vertical"
+			        rating="@save(vm.rating)"/>
+		</popup>
+		<popup id="pp_type">
+			<vlayout form="@id('fx') @load(vm.type) @save(vm.type,before='submitType')">
+				<radiogroup selectedIndex="@bind(fx.type)">
+					<vlayout>
+						<radio label="All"/>
+						<radio label="A"/>
+						<rating rating="@bind(fx.typeARating)" visible="@load(fx.type eq 1)"/>
+						<radio label="B"/>
+					</vlayout>
+				</radiogroup>
+				<hlayout>
+					<button label="Reset" disabled="@load(not fxStatus.dirty)"
+					        onClick="@command('resetType')"/>
+					<button label="Done" disabled="@load(not fxStatus.dirty)"
+					        onClick="@command('submitType')"/>
+				</hlayout>
+			</vlayout>
+		</popup>
+	</div>
+</zk>

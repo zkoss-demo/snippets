@@ -1,0 +1,23 @@
+.group {
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+}
+
+.group:focus-within {
+    border-color: #0093F9;
+}
+
+.group .z-textbox {
+    border: none;
+}
+
+.group .z-button {
+     background: transparent;
+     color: #256fa0;
+     box-shadow: none;
+     padding: 8px;
+}
+
+.group .z-button:hover {
+    color: #56a0d1;
+}
