@@ -8,3 +8,7 @@ $ ./mvnw jetty:run
 ```
 
 Then browse http://localhost:8080/snippets/
+
+## List
+
+[See here](src/main/webapp)
